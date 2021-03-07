@@ -1,0 +1,42 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+        - id: "dev"
+          password: "dev"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Job/Build:dev"
+        - "Job/Cancel:dev"
+        - "Job/Read:dev"
+        - "Job/Workspace:dev"
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+        - "Run/Replay:dev"
+        - "Run/Update:dev"
+jobs:
+  - script: >
+      folder('develop')
+  - script: >
+      pipelineJob("develop/JOB-Servers") {
+          description("JOB-Servers")
+          definition {
+              cpsScm {
+                  scm {
+                      git {
+                          remote {
+                              github("aldenso/tools", "https")
+                              credentials("github-user")
+                          }
+                          branch("*/master")
+                      }
+                  }
+                  scriptPath("devops/jenkins/Jenkins.groovy")
+              }
+          }
+          disabled(false)
+      }
