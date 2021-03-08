@@ -17,6 +17,7 @@ pam-auth:latest
 pipeline-github-lib:latest
 pipeline-stage-view:latest
 ssh-slaves:latest
+terraform:latest
 timestamper:latest
 workflow-aggregator:latest
 workflow-job
