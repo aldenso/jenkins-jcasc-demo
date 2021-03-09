@@ -24,6 +24,10 @@ jobs:
   - script: >
       pipelineJob("develop/JOB-Servers") {
           description("JOB-Servers")
+          parameters {
+            stringParam("PREFIX", "prefix", "your description here")
+            choiceParam('SIZE', ['Ds2 (default)', 'Ds4', 'Ds8'])
+          }
           definition {
               cpsScm {
                   scm {
