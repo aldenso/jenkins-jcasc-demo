@@ -36,7 +36,7 @@ jobs:
                               github("aldenso/terraform-pipeline-test", "https")
                               credentials("github-user")
                           }
-                          branch("*/master")
+                          branch("*/main")
                       }
                   }
                   scriptPath("devops/dev/Jenkinsfile.groovy")
