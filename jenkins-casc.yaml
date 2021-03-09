@@ -33,13 +33,13 @@ jobs:
                   scm {
                       git {
                           remote {
-                              github("aldenso/tools", "https")
+                              github("aldenso/terraform-pipeline-test", "https")
                               credentials("github-user")
                           }
                           branch("*/master")
                       }
                   }
-                  scriptPath("devops/jenkins/Jenkins.groovy")
+                  scriptPath("devops/dev/Jenkinsfile.groovy")
               }
           }
           disabled(false)
