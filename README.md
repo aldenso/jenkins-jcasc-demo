@@ -2,20 +2,6 @@
 
 Demo for jenkins with jcasc and docker
 
-```sh
-docker build --no-cache -t jenkins:jcasc .
-```
-
-```sh
-docker run -t -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home --name jenkins01 jenkins:jcasc
-```
-
-http://localhost:8080/
-
-username: admin
-
-password: admin
-
 ## Minimal requirements for testing.
 
 The following info must exists.
@@ -46,5 +32,13 @@ Start the service.
 ```bash
 docker-compose up -d
 ```
+
+Open your browser and play with it.
+
+http://localhost:8080/
+
+username: admin
+
+password: admin
 
 In the remote repositoty [terraform test repo](https://github.com/aldenso/terraform-pipeline-test/blob/main/main.tf) change the backend values.
