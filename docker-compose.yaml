@@ -1,0 +1,29 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  jenkins:
+    build: .
+    ports:
+      - "5000:5000"
+      - "8080:8080"
+    volumes:
+      - jenkinsvolumen:/var/jenkins_home
+    container_name: jenkins
+    secrets:
+      - secret_clientid
+      - secret_armaccesskey
+      - secret_subscription
+      - secret_tenant
+      - secret_spcertificatepfx
+volumes:
+  jenkinsvolumen: {}
+secrets:
+  secret_clientid:
+    file: secret_clientid
+  secret_armaccesskey:
+    file: secret_armaccesskey
+  secret_subscription:
+    file: secret_subscription
+  secret_tenant:
+    file: secret_tenant
+  secret_spcertificatepfx:
+    file: secret_spcertificatepfx

@@ -2,10 +2,12 @@ FROM jenkins/jenkins:lts-jdk11
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /usr/local/jenkins-casc.yaml
+ENV SECRETS_FILE /var/jenkins_home/secrets.properties
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 COPY jenkins-casc.yaml /usr/local/jenkins-casc.yaml
+COPY properties /var/jenkins_home/secrets.properties
 
 USER root
 RUN curl -OL https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip \

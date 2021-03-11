@@ -18,41 +18,32 @@ jenkins:
         - "Overall/Read:authenticated"
         - "Run/Replay:dev"
         - "Run/Update:dev"
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - string:
-              scope: GLOBAL
-              id: "AZTENANT-DEV"
-              secret: "${readFile:/run/secrets/secret_tenant}"
-              description: "AZTENANT-DEV"
-          - string:
-              scope: GLOBAL
-              id: "AZSUBSCRIPTION-DEV"
-              secret: "${readFile:/run/secrets/secret_subscription}"
-              description: "AZSUBSCRIPTION-DEV"
-          - string:
-              scope: GLOBAL
-              id: "AZACCESSKEY-DEV"
-              secret: "${readFile:/run/secrets/secret_armaccesskey}"
-              description: "AZACCESSKEY-DEV"
-          - string:
-              scope: GLOBAL
-              id: "AZCLIENT-DEV"
-              secret: "${readFile:/run/secrets/secret_clientid}"
-              description: "AZCLIENT-DEV"
-          - file:
-              scope: GLOBAL
-              id: "AZCERTIFICATE-DEV"
-              fileName: "mysecretfile.txt"
-              secretBytes: "${readFileBase64:/run/secrets/secret_spcertificatepfx}" # secretBytes requires base64 encoded content
 jobs:
   - script: >
       folder("develop") {
           description 'The folder contains all jobs for regular tests'
+          properties {
+              folderCredentialsProperty {
+                  domainCredentials {
+                      domainCredentials {
+                          domain {
+                              name("develop")
+                              description("Credentials necessary for our tests")
+                          }
+                          credentials {
+                              usernamePasswordCredentialsImpl {
+                                  scope("GLOBAL")
+                                  id("TEST-DEV")
+                                  description("User for deployments on test environment")
+                                  username("test_user_dev")
+                                  password("${readFile:/run/secrets/secret_armaccesskey}")
+                              }
+                          }
+                      }
+                  }
+              }
+          }
       }
-
   - script: >
       pipelineJob("develop/JOB-Servers") {
           description("JOB-Servers")
