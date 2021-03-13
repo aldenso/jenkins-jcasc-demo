@@ -52,13 +52,12 @@ jobs:
       folder("develop") {
           description 'The folder contains all jobs for regular tests'
       }
-
   - script: >
-      pipelineJob("develop/JOB-Servers") {
+      pipelineJob("develop/JOB-VM-Genesis") {
           description("JOB-Servers")
           parameters {
             stringParam("PREFIX", "prefix", "your description here")
-            choiceParam('SIZE', ['Ds2 (default)', 'Ds4', 'Ds8'])
+            choiceParam('SIZE', ['Standard_D2s_v3 (default)', 'Standard_D4s_v3', 'Standard_D8s_v3'])
           }
           definition {
               cpsScm {
@@ -71,7 +70,30 @@ jobs:
                           branch("*/main")
                       }
                   }
-                  scriptPath("devops/dev/Jenkinsfile.groovy")
+                  scriptPath("devops/dev/Jenkinsfile-genesis.groovy")
+              }
+          }
+          disabled(false)
+      }
+  - script: >
+      pipelineJob("develop/JOB-VM-Apocalipsis") {
+          description("JOB-Servers")
+          parameters {
+            stringParam("PREFIX", "prefix", "your description here")
+            choiceParam('SIZE', ['Standard_D2s_v3 (default)', 'Standard_D4s_v3', 'Standard_D8s_v3'])
+          }
+          definition {
+              cpsScm {
+                  scm {
+                      git {
+                          remote {
+                              github("aldenso/terraform-pipeline-test", "https")
+                              credentials("github-user")
+                          }
+                          branch("*/main")
+                      }
+                  }
+                  scriptPath("devops/dev/Jenkinsfile-apocalipsis.groovy")
               }
           }
           disabled(false)
