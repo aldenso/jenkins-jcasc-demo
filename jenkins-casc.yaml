@@ -57,7 +57,7 @@ jobs:
           description("JOB-Servers")
           parameters {
             stringParam("PREFIX", "prefix", "your description here")
-            choiceParam('SIZE', ['Standard_D2s_v3 (default)', 'Standard_D4s_v3', 'Standard_D8s_v3'])
+            choiceParam('SIZE', ['small', 'medium', 'large'])
           }
           definition {
               cpsScm {
@@ -80,7 +80,7 @@ jobs:
           description("JOB-Servers")
           parameters {
             stringParam("PREFIX", "prefix", "your description here")
-            choiceParam('SIZE', ['Standard_D2s_v3 (default)', 'Standard_D4s_v3', 'Standard_D8s_v3'])
+            choiceParam('SIZE', ['small', 'medium', 'large'])
           }
           definition {
               cpsScm {
