@@ -57,6 +57,7 @@ jobs:
           description("JOB-Servers")
           parameters {
             stringParam("PREFIX", "prefix", "your description here")
+            choiceParam('DISTRO', ['Windows', 'Linux'])
             choiceParam('SIZE', ['small', 'medium', 'large'])
           }
           definition {
@@ -80,6 +81,7 @@ jobs:
           description("JOB-Servers")
           parameters {
             stringParam("PREFIX", "prefix", "your description here")
+            choiceParam('DISTRO', ['Windows', 'Linux'])
             choiceParam('SIZE', ['small', 'medium', 'large'])
           }
           definition {
